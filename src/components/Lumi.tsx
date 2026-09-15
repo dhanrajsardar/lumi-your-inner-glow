@@ -11,11 +11,11 @@ export type LumiMood =
   | "shrug";
 
 type Props = {
-  mood?: LumiMood;
-  size?: number;
-  hat?: string;
-  face?: string;
-  className?: string;
+  mood?: LumiMood | undefined;
+  size?: number | undefined;
+  hat?: string | undefined;
+  face?: string | undefined;
+  className?: string | undefined;
 };
 
 const moodAnimation: Record<LumiMood, string> = {
