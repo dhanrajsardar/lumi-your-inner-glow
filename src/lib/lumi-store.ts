@@ -1,11 +1,12 @@
 import { useSyncExternalStore } from "react";
 
 export type JournalEntry = { id: string; text: string; date: string };
+export type LumiSlot = "hat" | "face" | "scene" | "outfit" | "accessory";
 
 export type LumiState = {
   coins: number;
   owned: string[];
-  equipped: { hat?: string; face?: string; scene?: string };
+  equipped: Partial<Record<LumiSlot, string>>;
   feed: JournalEntry[];
   nights: JournalEntry[];
   released: number;
@@ -106,7 +107,7 @@ export function registerRelease() {
   setState((s) => ({ ...s, coins: s.coins + 3, released: s.released + 1 }));
 }
 
-export function buyItem(itemId: string, price: number, slot: "hat" | "face" | "scene") {
+export function buyItem(itemId: string, price: number, slot: LumiSlot) {
   setState((s) =>
     s.owned.includes(itemId) || s.coins < price
       ? s
@@ -119,7 +120,7 @@ export function buyItem(itemId: string, price: number, slot: "hat" | "face" | "s
   );
 }
 
-export function toggleEquip(itemId: string, slot: "hat" | "face" | "scene") {
+export function toggleEquip(itemId: string, slot: LumiSlot) {
   setState((s) => ({
     ...s,
     equipped: { ...s.equipped, [slot]: s.equipped[slot] === itemId ? undefined : itemId },
