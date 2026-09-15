@@ -40,7 +40,7 @@ export function Lumi({ mood = "idle", size = 220, hat, face, className }: Props)
       <svg viewBox="0 0 200 164" width={size} height={size * 0.82} className="relative">
         <path
           className="lumi-body"
-          d="M18 132C8 86 34 34 68 28c6-10 12 6 20 10 7-5 13-20 22-11 30 9 40 44 44 74 3 20 16 25 25 13 10-14 22-3 17 15-6 21-38 29-70 27H42c-13 0-21-6-24-14Z"
+          d="M18 132C8 86 32 44 60 36C62 12 74 8 86 44C100 10 112 12 118 40c24 14 32 44 36 70 3 20 16 25 25 13 10-14 22-3 17 15-6 21-38 29-70 27H42c-13 0-21-6-24-14Z"
         />
         {face === "glasses" ? (
           <g className="lumi-line">
