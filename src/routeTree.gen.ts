@@ -11,7 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FeedRouteImport } from './routes/feed'
+import { Route as NightsRouteImport } from './routes/nights'
 import { Route as ReleaseRouteImport } from './routes/release'
+import { Route as RoomRouteImport } from './routes/room'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -23,40 +25,58 @@ const FeedRoute = FeedRouteImport.update({
   path: '/feed',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NightsRoute = NightsRouteImport.update({
+  id: '/nights',
+  path: '/nights',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ReleaseRoute = ReleaseRouteImport.update({
   id: '/release',
   path: '/release',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RoomRoute = RoomRouteImport.update({
+  id: '/room',
+  path: '/room',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/feed': typeof FeedRoute
+  '/nights': typeof NightsRoute
   '/release': typeof ReleaseRoute
+  '/room': typeof RoomRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/feed': typeof FeedRoute
+  '/nights': typeof NightsRoute
   '/release': typeof ReleaseRoute
+  '/room': typeof RoomRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/feed': typeof FeedRoute
+  '/nights': typeof NightsRoute
   '/release': typeof ReleaseRoute
+  '/room': typeof RoomRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/feed' | '/release'
+  fullPaths: '/' | '/feed' | '/nights' | '/release' | '/room'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/feed' | '/release'
-  id: '__root__' | '/' | '/feed' | '/release'
+  to: '/' | '/feed' | '/nights' | '/release' | '/room'
+  id: '__root__' | '/' | '/feed' | '/nights' | '/release' | '/room'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FeedRoute: typeof FeedRoute
+  NightsRoute: typeof NightsRoute
   ReleaseRoute: typeof ReleaseRoute
+  RoomRoute: typeof RoomRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -75,11 +95,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FeedRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/nights': {
+      id: '/nights'
+      path: '/nights'
+      fullPath: '/nights'
+      preLoaderRoute: typeof NightsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/release': {
       id: '/release'
       path: '/release'
       fullPath: '/release'
       preLoaderRoute: typeof ReleaseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/room': {
+      id: '/room'
+      path: '/room'
+      fullPath: '/room'
+      preLoaderRoute: typeof RoomRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -88,7 +122,9 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FeedRoute: FeedRoute,
+  NightsRoute: NightsRoute,
   ReleaseRoute: ReleaseRoute,
+  RoomRoute: RoomRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
