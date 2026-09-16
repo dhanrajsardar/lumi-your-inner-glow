@@ -18,6 +18,8 @@ export const Route = createFileRoute("/feed")({
         property: "og:description",
         content: "Write one thing you like about yourself and watch Lumi light up.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: FeedPage,
@@ -34,15 +36,22 @@ function FeedPage() {
   const { feed, equipped } = useLumi();
   const [text, setText] = useState("");
   const [fed, setFed] = useState(false);
+  const [feeding, setFeeding] = useState<string | null>(null);
   const prompt = prompts[new Date().getDate() % prompts.length];
 
   function submit() {
     if (!text.trim()) return;
-    addFeedEntry(text.trim());
+    const words = text.trim();
+    setFeeding(words);
     buzz([20, 40, 20]);
     setText("");
-    setFed(true);
-    window.setTimeout(() => setFed(false), 4000);
+    window.setTimeout(() => {
+      addFeedEntry(words);
+      setFeeding(null);
+      setFed(true);
+      buzz([18, 35, 18]);
+      window.setTimeout(() => setFed(false), 4000);
+    }, 1250);
   }
 
   return (
@@ -53,8 +62,20 @@ function FeedPage() {
           <p className="mt-1 text-sm text-muted-foreground">Feed him by writing {prompt}.</p>
         </div>
 
-        <div className="grid place-items-center">
-          <Lumi mood={fed ? "happy" : "idle"} size={180} hat={equipped.hat} face={equipped.face} />
+        <div className="relative grid min-h-48 place-items-center overflow-visible">
+          {feeding ? (
+            <p className="animate-feed-words absolute bottom-1 z-10 max-w-52 text-center text-sm font-semibold text-primary">
+              {feeding}
+            </p>
+          ) : null}
+          <Lumi
+            mood={feeding ? "eat" : fed ? "happy" : "idle"}
+            size={190}
+            hat={equipped.hat}
+            face={equipped.face}
+            outfit={equipped.outfit}
+            accessory={equipped.accessory}
+          />
         </div>
 
         {fed ? (
@@ -73,9 +94,10 @@ function FeedPage() {
           />
           <button
             onClick={submit}
+              disabled={feeding !== null}
             className="mt-2 min-h-[52px] w-full rounded-full bg-primary px-6 font-display font-semibold text-primary-foreground transition-transform active:scale-95"
           >
-            Feed Lumi
+              {feeding ? "Lumi is munching…" : "Feed Lumi"}
           </button>
         </div>
 

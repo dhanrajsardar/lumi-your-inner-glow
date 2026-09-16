@@ -20,6 +20,8 @@ export const Route = createFileRoute("/")({
         property: "og:description",
         content: "Hug Lumi for instant relief, feed your fluffy friend, and be kinder to yourself.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: HomePage,
@@ -86,9 +88,12 @@ function HomePage() {
   function startHug() {
     buzz([30, 60, 30, 60, 220]);
     setStage("hugging");
-    setMood("close");
+    setMood("hug");
     setLine("I've got you. Breathe with me.");
-    window.setTimeout(() => setStage("breathe"), 2800);
+    window.setTimeout(() => {
+      setStage("breathe");
+      setMood("love");
+    }, 2800);
     window.setTimeout(() => {
       setStage("scan");
       setMood("idle");
@@ -133,7 +138,14 @@ function HomePage() {
             stage === "hugging" && "animate-hug-fill",
           )}
         >
-          <Lumi mood={mood} size={stage === "breathe" ? 250 : 230} hat={equipped.hat} face={equipped.face} />
+          <Lumi
+            mood={mood}
+            size={stage === "breathe" ? 250 : 230}
+            hat={equipped.hat}
+            face={equipped.face}
+            outfit={equipped.outfit}
+            accessory={equipped.accessory}
+          />
         </div>
 
         {stage === "breathe" ? (
