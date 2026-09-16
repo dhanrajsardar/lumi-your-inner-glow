@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { Lumi } from "@/components/Lumi";
 import { PhoneFrame } from "@/components/PhoneFrame";
-import { buyItem, buzz, toggleEquip, useLumi } from "@/lib/lumi-store";
+import { buyItem, buzz, toggleEquip, useLumi, type LumiSlot } from "@/lib/lumi-store";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/room")({
@@ -19,15 +19,24 @@ export const Route = createFileRoute("/room")({
         property: "og:description",
         content: "Hats, glasses and warm skies for your fluffy friend.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: RoomPage,
 });
 
-const items = [
-  { id: "beanie", name: "Soft beanie", price: 15, slot: "hat" as const },
-  { id: "crown", name: "Tiny crown", price: 25, slot: "hat" as const },
-  { id: "glasses", name: "Round glasses", price: 20, slot: "face" as const },
+const items: { id: string; name: string; price: number; slot: LumiSlot; icon: string }[] = [
+  { id: "beanie", name: "Soft beanie", price: 15, slot: "hat", icon: "🧢" },
+  { id: "crown", name: "Tiny crown", price: 25, slot: "hat", icon: "👑" },
+  { id: "bow", name: "Sweet bow", price: 12, slot: "hat", icon: "🎀" },
+  { id: "headphones", name: "Cozy headphones", price: 25, slot: "hat", icon: "🎧" },
+  { id: "glasses", name: "Round glasses", price: 20, slot: "face", icon: "👓" },
+  { id: "scarf", name: "Warm scarf", price: 18, slot: "outfit", icon: "🧣" },
+  { id: "hoodie", name: "Frog hoodie", price: 30, slot: "outfit", icon: "🐸" },
+  { id: "blanket", name: "Hug blanket", price: 22, slot: "outfit", icon: "🩷" },
+  { id: "heart-sticker", name: "Heart sticker", price: 8, slot: "accessory", icon: "💗" },
+  { id: "star-sticker", name: "Glow star", price: 8, slot: "accessory", icon: "⭐" },
 ];
 
 function RoomPage() {
@@ -43,8 +52,15 @@ function RoomPage() {
           </p>
         </div>
 
-        <div className="glass-card grid place-items-center rounded-3xl py-4">
-          <Lumi mood="idle" size={180} hat={equipped.hat} face={equipped.face} />
+        <div className="glass-card grid min-h-52 place-items-center rounded-3xl py-4">
+          <Lumi
+            mood="proud"
+            size={205}
+            hat={equipped.hat}
+            face={equipped.face}
+            outfit={equipped.outfit}
+            accessory={equipped.accessory}
+          />
         </div>
 
         <div className="space-y-2 pb-4">
@@ -56,11 +72,16 @@ function RoomPage() {
                 key={item.id}
                 className="glass-card grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 rounded-2xl px-4 py-3"
               >
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-medium">{item.name}</p>
-                  <p className="text-xs text-muted-foreground">
-                    {has ? "Yours" : `${item.price} ♡`}
-                  </p>
+                <div className="flex min-w-0 items-center gap-3">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-secondary text-xl" aria-hidden>
+                    {item.icon}
+                  </span>
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-medium">{item.name}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {has ? "Yours" : `${item.price} ♡`}
+                    </p>
+                  </div>
                 </div>
                 <button
                   onClick={() => {

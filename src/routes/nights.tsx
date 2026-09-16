@@ -18,6 +18,8 @@ export const Route = createFileRoute("/nights")({
         property: "og:description",
         content: "One soft line a night, kept safe for the days you forget.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: NightsPage,
@@ -48,7 +50,14 @@ function NightsPage() {
         </div>
 
         <div className="grid place-items-center">
-          <Lumi mood={saved ? "happy" : "anxious"} size={150} hat={equipped.hat} face={equipped.face} />
+          <Lumi
+            mood={saved ? "proud" : "sleepy"}
+            size={150}
+            hat={equipped.hat}
+            face={equipped.face}
+            outfit={equipped.outfit}
+            accessory={equipped.accessory}
+          />
         </div>
 
         <div className="glass-card rounded-3xl p-3">

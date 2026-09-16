@@ -20,6 +20,8 @@ export const Route = createFileRoute("/release")({
         property: "og:description",
         content: "A satisfying way to release the harsh voice in your head.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: ReleasePage,
@@ -105,7 +107,14 @@ function ReleasePage() {
 
             {state === "gone" ? (
               <div className="animate-soft-rise text-center">
-                <Lumi mood="happy" size={150} hat={equipped.hat} face={equipped.face} />
+                <Lumi
+                  mood="proud"
+                  size={150}
+                  hat={equipped.hat}
+                  face={equipped.face}
+                  outfit={equipped.outfit}
+                  accessory={equipped.accessory}
+                />
                 <p className="mt-2 text-sm font-medium text-primary">
                   That wasn't your reality. It's gone now. +3 ♡
                 </p>

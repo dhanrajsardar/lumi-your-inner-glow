@@ -36,6 +36,10 @@
   --color-lumi: var(--lumi);
   --color-lumi-ink: var(--lumi-ink);
   --color-glow: var(--glow);
+  --color-love: var(--love);
+  --color-gold: var(--gold);
+  --color-mint: var(--mint);
+  --color-sky: var(--sky);
   --font-display: "Quicksand", ui-rounded, system-ui, sans-serif;
   --font-sans: "Nunito", ui-rounded, system-ui, sans-serif;
 }
@@ -65,6 +69,10 @@
   --lumi: oklch(0.86 0.012 300);
   --lumi-ink: oklch(0.28 0.02 300);
   --glow: oklch(0.9 0.07 330);
+  --love: oklch(0.72 0.16 350);
+  --gold: oklch(0.82 0.15 82);
+  --mint: oklch(0.77 0.12 150);
+  --sky: oklch(0.72 0.1 250);
 }
 
 .dark {
@@ -152,6 +160,45 @@
   fill: none;
 }
 
+.lumi-whiskers {
+  stroke: var(--lumi-ink);
+  fill: none;
+}
+
+.lumi-mouth,
+.lumi-mouth-open {
+  fill: var(--lumi-ink);
+}
+
+.lumi-mouth-open {
+  transform-origin: 98px 109px;
+  animation: lumi-mouth-munch 0.34s ease-in-out infinite;
+}
+
+.lumi-heart {
+  fill: var(--love);
+  filter: drop-shadow(0 0 8px color-mix(in oklab, var(--love) 80%, transparent));
+  transform-origin: 98px 116px;
+  animation: lumi-heartbeat 0.8s ease-in-out infinite;
+}
+
+.lumi-arm {
+  fill: none;
+  stroke: color-mix(in oklab, var(--lumi) 88%, var(--lumi-ink));
+  stroke-width: 12;
+  stroke-linecap: round;
+  animation: lumi-arms-squeeze 0.8s ease-in-out infinite;
+}
+
+.lumi-tears {
+  fill: var(--sky);
+  opacity: 0.8;
+}
+
+.lumi-blush {
+  fill: color-mix(in oklab, var(--love) 58%, transparent);
+}
+
 .lumi-sparkle path {
   fill: color-mix(in oklab, var(--accent) 80%, white);
   animation: lumi-twinkle 1.4s ease-in-out infinite;
@@ -163,6 +210,56 @@
 
 .lumi-hat-band {
   fill: var(--primary);
+}
+
+.lumi-crown {
+  fill: var(--gold);
+  stroke: color-mix(in oklab, var(--gold) 68%, var(--foreground));
+  stroke-width: 2;
+}
+
+.lumi-bow,
+.lumi-sticker {
+  fill: var(--love);
+  filter: drop-shadow(0 2px 3px color-mix(in oklab, var(--love) 42%, transparent));
+}
+
+.lumi-star {
+  fill: var(--gold);
+}
+
+.lumi-headphones path {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 7;
+}
+
+.lumi-headphones rect {
+  fill: var(--primary);
+  stroke: color-mix(in oklab, var(--primary) 65%, var(--foreground));
+  stroke-width: 2;
+}
+
+.lumi-scarf {
+  fill: var(--love);
+  stroke: color-mix(in oklab, var(--love) 65%, var(--foreground));
+  stroke-width: 2;
+}
+
+.lumi-hoodie {
+  fill: color-mix(in oklab, var(--mint) 82%, var(--card));
+  stroke: color-mix(in oklab, var(--mint) 62%, var(--foreground));
+  stroke-width: 3;
+}
+
+.lumi-hoodie-eye {
+  fill: var(--lumi-ink);
+}
+
+.lumi-blanket {
+  fill: color-mix(in oklab, var(--love) 38%, var(--card));
+  stroke: color-mix(in oklab, var(--love) 62%, var(--foreground));
+  stroke-width: 3;
 }
 
 @keyframes lumi-pulse {
@@ -231,6 +328,51 @@
   100% {
     transform: scale(1.22) translateY(6px);
   }
+}
+
+@keyframes lumi-hug {
+  0% { transform: translateY(8px) scale(0.92); }
+  42% { transform: translateY(-4px) scale(1.1); }
+  68% { transform: translateY(1px) scale(1.03); }
+  82% { transform: translateY(-1px) scale(1.08); }
+  100% { transform: translateY(0) scale(1.06); }
+}
+
+@keyframes lumi-arms-squeeze {
+  0%, 100% { transform: scaleX(1); }
+  50% { transform: scaleX(0.93); }
+}
+
+@keyframes lumi-heartbeat {
+  0%, 100% { transform: scale(0.94); }
+  45% { transform: scale(1.08); }
+}
+
+@keyframes lumi-chew {
+  0%, 100% { transform: translateY(0) scale(1); }
+  35% { transform: translateY(3px) scaleX(1.04) scaleY(0.96); }
+  70% { transform: translateY(-3px) scaleX(0.98) scaleY(1.03); }
+}
+
+@keyframes lumi-mouth-munch {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.35); }
+}
+
+@keyframes feed-words {
+  0% { opacity: 1; transform: translateY(92px) scale(1); filter: blur(0); }
+  70% { opacity: 1; transform: translateY(-13px) scale(0.72); filter: blur(0); }
+  100% { opacity: 0; transform: translateY(-43px) scale(0.08); filter: blur(3px); }
+}
+
+@keyframes lumi-proud {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-7px) rotate(1deg) scale(1.025); }
+}
+
+@keyframes lumi-pop {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
 }
 
 @keyframes lumi-sink {
@@ -312,6 +454,21 @@
 .animate-lumi-approach {
   animation: lumi-approach 1.6s ease-out forwards;
 }
+.animate-lumi-hug {
+  animation: lumi-hug 2.6s ease-in-out forwards;
+}
+.animate-lumi-chew {
+  animation: lumi-chew 0.52s ease-in-out infinite;
+}
+.animate-lumi-proud {
+  animation: lumi-proud 3.2s ease-in-out infinite;
+}
+.animate-lumi-pop {
+  animation: lumi-pop 1.4s ease-in-out infinite;
+}
+.animate-feed-words {
+  animation: feed-words 1.2s cubic-bezier(0.3, 0.75, 0.3, 1) forwards;
+}
 .animate-lumi-sink {
   animation: lumi-sink 5s ease-in-out infinite;
 }
@@ -332,4 +489,25 @@
 }
 .animate-swallow {
   animation: swallow 0.9s ease-in forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-lumi-float,
+  .animate-lumi-dance,
+  .animate-lumi-approach,
+  .animate-lumi-hug,
+  .animate-lumi-sink,
+  .animate-lumi-lean,
+  .animate-lumi-breathe,
+  .animate-lumi-chew,
+  .animate-lumi-proud,
+  .animate-lumi-pop,
+  .animate-hug-fill,
+  .lumi-glow,
+  .lumi-eyes ellipse,
+  .lumi-heart,
+  .lumi-arm {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+  }
 }
