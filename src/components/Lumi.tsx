@@ -62,11 +62,16 @@ export function Lumi({
       aria-hidden
     >
       <div className="lumi-glow" />
-      <svg viewBox="0 0 200 164" width={size} height={size * 0.82} className="relative overflow-visible">
-        <path
-          className="lumi-body"
-          d="M18 132C8 86 32 44 60 36C62 12 74 8 86 44C100 10 112 12 118 40c24 14 32 44 36 70 3 20 16 25 25 13 10-14 22-3 17 15-6 21-38 29-70 27H42c-13 0-21-6-24-14Z"
-        />
+      <svg viewBox="0 0 200 174" width={size} height={size * 0.87} className="relative overflow-visible">
+        <g className="lumi-living">
+          <path
+            className="lumi-tail"
+            d="M143 137c14 13 30 12 39 0 7-10 17-6 15 6-3 18-22 28-43 20-8-3-14-9-17-15Z"
+          />
+          <path
+            className="lumi-body"
+            d="M20 137C13 108 17 77 36 56c8-9 17-15 28-19 0-15 4-26 11-28 8-2 15 14 20 29 6-14 14-25 22-23 8 2 12 16 10 31 21 12 32 36 33 64 1 23-5 41-20 49-12 7-25 3-40 5-23 4-48 5-64-3-10-5-16-13-16-24Z"
+          />
 
         {outfit === "hoodie" ? (
           <g><path className="lumi-hoodie" d="M27 116q72 38 137-3l-5 46q-62 15-128 1z" /><circle className="lumi-hoodie-eye" cx="55" cy="124" r="5" /><circle className="lumi-hoodie-eye" cx="137" cy="122" r="5" /></g>
@@ -109,7 +114,8 @@ export function Lumi({
         {hat === "headphones" ? <g className="lumi-headphones"><path d="M55 72q4-48 43-48t45 48" /><rect x="47" y="68" width="17" height="32" rx="8" /><rect x="135" y="68" width="17" height="32" rx="8" /></g> : null}
         {face === "glasses" ? <g className="lumi-line"><circle cx="78" cy="88" r="13" fill="none" strokeWidth="4" /><circle cx="118" cy="88" r="13" fill="none" strokeWidth="4" /><path d="M91 88h14" strokeWidth="4" /></g> : null}
         {accessory === "heart-sticker" ? <path className="lumi-sticker" d="M127 122c-11-8-2-18 5-10 7-8 16 2 5 10l-5 4z" /> : null}
-        {accessory === "star-sticker" ? <path className="lumi-star" d="m130 110 4 9 10 1-8 7 2 10-8-5-9 5 2-10-8-7 11-1z" /> : null}
+          {accessory === "star-sticker" ? <path className="lumi-star" d="m130 110 4 9 10 1-8 7 2 10-8-5-9 5 2-10-8-7 11-1z" /> : null}
+        </g>
       </svg>
     </div>
   );
