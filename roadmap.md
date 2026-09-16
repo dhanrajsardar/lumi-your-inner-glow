@@ -5,3 +5,4 @@
 - [x] Animate the submitted words into Lumi's mouth during feeding
 - [x] Expand Lumi's room with fitted clothes, headwear, glasses, and stickers
 - [x] Verify the key screens and interactions at the mobile viewport
+- [x] Round Lumi's lower body, balance the ears, and add floating, breathing, and tail micro-movements

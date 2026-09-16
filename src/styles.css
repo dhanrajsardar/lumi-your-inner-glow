@@ -149,6 +149,22 @@
   paint-order: stroke;
 }
 
+.lumi-living {
+  transform-box: fill-box;
+  transform-origin: 50% 82%;
+  animation: lumi-idle-breathe 4.8s ease-in-out infinite;
+}
+
+.lumi-tail {
+  fill: var(--lumi);
+  stroke: color-mix(in oklab, white 70%, var(--lumi));
+  stroke-width: 6;
+  paint-order: stroke;
+  transform-box: fill-box;
+  transform-origin: 8% 72%;
+  animation: lumi-tail-wag 3.6s ease-in-out infinite;
+}
+
 .lumi-eyes ellipse {
   fill: var(--lumi-ink);
   transform-origin: center;
@@ -296,13 +312,21 @@
 }
 
 @keyframes lumi-float {
-  0%,
-  100% {
-    transform: translateY(0) scale(1);
-  }
-  50% {
-    transform: translateY(-10px) scale(1.015);
-  }
+  0% { transform: translateY(0); }
+  25% { transform: translateY(-7px); }
+  50% { transform: translateY(-11px); }
+  75% { transform: translateY(-7px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes lumi-idle-breathe {
+  0%, 100% { transform: scaleX(1) scaleY(1); }
+  50% { transform: scaleX(1.018) scaleY(1.025); }
+}
+
+@keyframes lumi-tail-wag {
+  0%, 100% { transform: rotate(-4deg) translateY(1px); }
+  50% { transform: rotate(8deg) translateY(-2px); }
 }
 
 @keyframes lumi-dance {
@@ -446,7 +470,7 @@
 }
 
 .animate-lumi-float {
-  animation: lumi-float 6s ease-in-out infinite;
+  animation: lumi-float 5.6s ease-in-out infinite;
 }
 .animate-lumi-dance {
   animation: lumi-dance 1.1s ease-in-out infinite;
@@ -504,6 +528,8 @@
   .animate-lumi-pop,
   .animate-hug-fill,
   .lumi-glow,
+  .lumi-living,
+  .lumi-tail,
   .lumi-eyes ellipse,
   .lumi-heart,
   .lumi-arm {
